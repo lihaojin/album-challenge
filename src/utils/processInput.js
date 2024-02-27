@@ -23,7 +23,7 @@ function processInput(input = '', albumCollection = new Map()) {
             }
 
             if (!['all', 'unplayed'].some(filter => params?.[0] === filter)) {
-                console.log('Invalid command');
+                console.log('Invalid command.');
                 break;
             }
 

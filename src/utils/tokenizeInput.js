@@ -8,8 +8,8 @@ function tokenizeInput(input) {
             tokenList.push(currentToken);
             currentToken = '';
         }
-        } else if (input[i] == '"') {
-            const closingQuoteIndex = input.indexOf('"', i + 1);
+        } else if (input[i] == '"' || input[i] === "'") {
+            const closingQuoteIndex = input.indexOf(input[i], i + 1);
         
             if (closingQuoteIndex !== -1) {
                 tokenList.push(input.substring(i + 1, closingQuoteIndex));
