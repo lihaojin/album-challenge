@@ -26,7 +26,7 @@ describe('processInput function', () => {
       test('should not add album if title or artist are missing', () => {
         processInput('add', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Please specify title and artist');
-        processInput('add "test"', albumCollection);
+        processInput('Add "test"', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Please specify title and artist');
       });
   });
@@ -40,7 +40,7 @@ describe('processInput function', () => {
     test('should show all albums', () => {
         processInput('add "Title1" "Artist1"', albumCollection);
         processInput('add "Title2" "Artist2"', albumCollection);
-        processInput('show all', albumCollection);
+        processInput('Show all', albumCollection);
         expect(mockConsoleLog).toHaveBeenNthCalledWith(3, '"Title1" by Artist1 (unplayed)');
         expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
     });
@@ -78,6 +78,11 @@ describe('processInput function', () => {
         processInput('show all by', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Please specify the artist');
     });
+
+    test('should return invalid input', () => {
+        processInput('show all test', albumCollection);
+        expect(mockConsoleLog).toHaveBeenCalledWith('Invalid command.');
+    })
   });
 
   describe('Playing an album', () => {
@@ -88,7 +93,7 @@ describe('processInput function', () => {
       });
     
       test('should prompt to specify album name when playing without it', () => {
-        processInput('play', albumCollection);
+        processInput('Play', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Please specify the album name');
       });
 

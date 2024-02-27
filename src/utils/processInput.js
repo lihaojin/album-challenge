@@ -22,12 +22,15 @@ function processInput(input = '', albumCollection = new Map()) {
                 console.log('Specify what you want to show, (i.e. "show all" or "show unplayed"');
             }
 
-            if (!['all', 'unplayed'].some(filter => params?.[0] === filter)) {
+            if (
+                params?.[1] && params[1] !== 'by' || 
+                !['all', 'unplayed'].some(filter => params?.[0] === filter
+            )) {
                 console.log('Invalid command.');
                 break;
             }
 
-            if (params?.[1] === 'by') {
+            if (params[1] === 'by') {
                 const artistFilter = params?.[2];
 
                 if (artistFilter) {
