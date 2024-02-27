@@ -33,19 +33,23 @@ export default class AlbumCollection {
 
             console.log(`You're listening to "${title}"`);
         } else {
-            console.log(`Album "${title}" not found.`)
+            console.log(`Album "${title}" not found.`);
         }
     }
 
     show(filters = {}) {
         let filteredAlbums = [...this.albums.values()];
-        const validFilterKeys = Object.keys(filters).filter(key => !!ALBUM_ATTRIBUTES[key]);
+        const validFilterKeys = Object.keys(filters).filter(
+            (key) => !!ALBUM_ATTRIBUTES[key]
+        );
         const hasPlayedFilter = validFilterKeys.includes('played');
-        
+
         if (validFilterKeys.length > 0) {
-            filteredAlbums = filteredAlbums.filter(album => {
-                return validFilterKeys.every(key => album[key] === filters[key]);
-            })
+            filteredAlbums = filteredAlbums.filter((album) => {
+                return validFilterKeys.every(
+                    (key) => album[key] === filters[key]
+                );
+            });
         }
 
         if (filteredAlbums.length === 0) {
@@ -53,12 +57,14 @@ export default class AlbumCollection {
         }
 
         if (hasPlayedFilter) {
-            filteredAlbums.forEach(album => {
-                console.log(`"${album.title}" by ${album.artist}`)
+            filteredAlbums.forEach((album) => {
+                console.log(`"${album.title}" by ${album.artist}`);
             });
         } else {
-            filteredAlbums.forEach(album => {
-                console.log(`"${album.title}" by ${album.artist} (${album.played ? 'played' : 'unplayed'})`)
+            filteredAlbums.forEach((album) => {
+                console.log(
+                    `"${album.title}" by ${album.artist} (${album.played ? 'played' : 'unplayed'})`
+                );
             });
         }
     }

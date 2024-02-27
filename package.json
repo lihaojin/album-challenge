@@ -1,16 +1,17 @@
 {
-  "name": "primary-coding-challenge",
-  "version": "1.0.0",
-  "main": "music.js",
-  "type": "module",
-  "scripts": {
-    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "jest": "^29.7.0"
-  }
+    "name": "primary-coding-challenge",
+    "version": "1.0.0",
+    "main": "music.js",
+    "type": "module",
+    "scripts": {
+        "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "prettier": "3.2.5"
+    }
 }

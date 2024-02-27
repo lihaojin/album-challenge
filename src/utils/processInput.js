@@ -10,12 +10,17 @@ function processInput(input = '', albumCollection = new Map()) {
     switch (action?.toLowerCase()) {
         case ACTIONS.ADD:
             if (params.length === 2) {
-                if(!params.every(param => wrappedInQuotes(param))) {
-                    console.log('album title and artist must be wrapped in double quotes');
+                if (!params.every((param) => wrappedInQuotes(param))) {
+                    console.log(
+                        'album title and artist must be wrapped in double quotes'
+                    );
                     break;
                 }
 
-                albumCollection.addAlbum(stripQuotes(params?.[0]), stripQuotes(params?.[1]));
+                albumCollection.addAlbum(
+                    stripQuotes(params?.[0]),
+                    stripQuotes(params?.[1])
+                );
             } else {
                 console.log('Please specify title and artist');
             }
@@ -26,13 +31,15 @@ function processInput(input = '', albumCollection = new Map()) {
             let filters = {};
 
             if (params?.length === 0) {
-                console.log('Specify what you want to show, (i.e. "show all" or "show unplayed"');
+                console.log(
+                    'Specify what you want to show, (i.e. "show all" or "show unplayed"'
+                );
             }
 
             if (
-                params?.[1] && params[1] !== 'by' || 
-                !['all', 'unplayed'].some(filter => params?.[0] === filter
-            )) {
+                (params?.[1] && params[1] !== 'by') ||
+                !['all', 'unplayed'].some((filter) => params?.[0] === filter)
+            ) {
                 console.log('Invalid command.');
                 break;
             }
@@ -41,8 +48,10 @@ function processInput(input = '', albumCollection = new Map()) {
                 const artistFilter = params?.[2];
 
                 if (artistFilter) {
-                    if(!wrappedInQuotes(artistFilter)) {
-                        console.log('album artist must be wrapped in double quotes');
+                    if (!wrappedInQuotes(artistFilter)) {
+                        console.log(
+                            'album artist must be wrapped in double quotes'
+                        );
                         break;
                     }
 
@@ -64,7 +73,7 @@ function processInput(input = '', albumCollection = new Map()) {
 
         case ACTIONS.PLAY:
             if (params?.length === 1) {
-                if(!wrappedInQuotes(params?.[0])) {
+                if (!wrappedInQuotes(params?.[0])) {
                     console.log('album title must be wrapped in double quotes');
                     break;
                 }
@@ -80,7 +89,7 @@ function processInput(input = '', albumCollection = new Map()) {
             process.exit(0);
 
         default:
-            console.log('Invalid command.')
+            console.log('Invalid command.');
     }
 }
 

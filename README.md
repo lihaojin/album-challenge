@@ -13,11 +13,13 @@ To start the music app:
 ```
 
 To run unit tests
+
 ```
 npm run test
 ```
 
 Sample input/output
+
 ```
     Welcome to your music collection!
 
@@ -28,7 +30,7 @@ Sample input/output
     > add "Licensed to Ill" "Beastie Boys"
 
     Added "Licensed to Ill" by Beastie Boys
-    
+
     > add "Pauls Boutique" "Beastie Boys"
 
     Added "Pauls Boutique" by Beastie Boys
@@ -79,4 +81,3 @@ Sample input/output
 
     $
 ```
-

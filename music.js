@@ -14,7 +14,7 @@ function startMusicApp() {
 
     inputInterface.prompt();
 
-    inputInterface.on('line', (input) => { 
+    inputInterface.on('line', (input) => {
         console.log();
         processInput(input.trim(), albumCollection);
         console.log();
