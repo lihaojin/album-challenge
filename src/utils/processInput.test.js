@@ -41,8 +41,8 @@ describe('processInput function', () => {
         processInput('add "Title1" "Artist1"', albumCollection);
         processInput('add "Title2" "Artist2"', albumCollection);
         processInput('show all', albumCollection);
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(3, '"Title1 by Artist1 (unplayed)"');
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2 by Artist2 (unplayed)"');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(3, '"Title1" by Artist1 (unplayed)');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
     });
 
     test('should show unplayed albums', () => {
@@ -51,8 +51,8 @@ describe('processInput function', () => {
         processInput('add "Title3" "Artist3"', albumCollection);
         processInput('play "Title1"', albumCollection);
         processInput('show unplayed', albumCollection);
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(5, '"Title2 by Artist2 (unplayed)"');
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(6, '"Title3 by Artist3 (unplayed)"');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(5, '"Title2" by Artist2');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(6, '"Title3" by Artist3');
     });
 
     test('should show albums by artist', () => {
@@ -61,10 +61,18 @@ describe('processInput function', () => {
         processInput('add "Title3" "Artist1"', albumCollection);
         processInput('add "Title4" "Artist2"', albumCollection);
         processInput('show all by "Artist1"', albumCollection);
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(5, '"Title1 by Artist1 (unplayed)"');
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(6, '"Title2 by Artist1 (unplayed)"');
-        expect(mockConsoleLog).toHaveBeenNthCalledWith(7, '"Title3 by Artist1 (unplayed)"');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(5, '"Title1" by Artist1 (unplayed)');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(6, '"Title2" by Artist1 (unplayed)');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(7, '"Title3" by Artist1 (unplayed)');
     });
+
+    test('should show unplayed albums by artist', () => {
+        processInput('add "Title1" "Artist1"', albumCollection);
+        processInput('add "Title2" "Artist1"', albumCollection);
+        processInput('play "Title1"', albumCollection);
+        processInput('show unplayed by "Artist1"', albumCollection);
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist1');
+    })
 
     test('should prompt to specify artist when showing by artist without it', () => {
         processInput('show all by', albumCollection);

@@ -40,7 +40,8 @@ export default class AlbumCollection {
     show(filters = {}) {
         let filteredAlbums = [...this.albums.values()];
         const validFilterKeys = Object.keys(filters).filter(key => !!ALBUM_ATTRIBUTES[key]);
-
+        const hasPlayedFilter = validFilterKeys.includes('played');
+        
         if (validFilterKeys.length > 0) {
             filteredAlbums = filteredAlbums.filter(album => {
                 return validFilterKeys.every(key => album[key] === filters[key]);
@@ -51,8 +52,14 @@ export default class AlbumCollection {
             console.log('No albums found');
         }
 
-        filteredAlbums.forEach(album => {
-            console.log(`"${album.title} by ${album.artist} (${album.played ? 'played' : 'unplayed'})"`)
-        })
+        if (hasPlayedFilter) {
+            filteredAlbums.forEach(album => {
+                console.log(`"${album.title}" by ${album.artist}`)
+            });
+        } else {
+            filteredAlbums.forEach(album => {
+                console.log(`"${album.title}" by ${album.artist} (${album.played ? 'played' : 'unplayed'})`)
+            });
+        }
     }
 }

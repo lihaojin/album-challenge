@@ -53,8 +53,8 @@ describe('AlbumCollection', () => {
         albumCollection.show();
         expect(mockLog).toHaveBeenNthCalledWith(1, "Added \"Title1\" by \"Artist1\"");
         expect(mockLog).toHaveBeenNthCalledWith(2, "Added \"Title2\" by \"Artist2\"");
-        expect(mockLog).toHaveBeenNthCalledWith(3, '"Title1 by Artist1 (unplayed)"');
-        expect(mockLog).toHaveBeenNthCalledWith(4, '"Title2 by Artist2 (unplayed)"');
+        expect(mockLog).toHaveBeenNthCalledWith(3, '"Title1" by Artist1 (unplayed)');
+        expect(mockLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
         mockLog.mockRestore();
       });
     
@@ -65,7 +65,7 @@ describe('AlbumCollection', () => {
         albumCollection.addAlbum('Title3', 'Artist3');
         albumCollection.playAlbum('Title2'); 
         albumCollection.show({ played: false, artist: 'Artist1' });
-        expect(mockLog).toHaveBeenCalledWith('"Title1 by Artist1 (unplayed)"');
+        expect(mockLog).toHaveBeenCalledWith('"Title1" by Artist1');
         mockLog.mockRestore();
       });
     
