@@ -4,7 +4,7 @@ import processInput from './src/utils/processInput.js';
 import readline from 'readline';
 
 function startMusicApp() {
-    console.log('Welcome to your music collection!');
+    console.log(`\nWelcome to your music collection!\n`);
     const albumCollection = new AlbumCollection();
     const inputInterface = readline.createInterface({
         input: process.stdin,
@@ -14,8 +14,10 @@ function startMusicApp() {
 
     inputInterface.prompt();
 
-    inputInterface.on('line', (input) => {
+    inputInterface.on('line', (input) => { 
+        console.log();
         processInput(input.trim(), albumCollection);
+        console.log();
         inputInterface.prompt();
     });
 }

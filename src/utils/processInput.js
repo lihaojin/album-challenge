@@ -5,7 +5,7 @@ function processInput(input = '', albumCollection = new Map()) {
     const tokens = tokenizeInput(input.trim());
     const [action, ...params] = tokens;
 
-    switch (action.toLowerCase()) {
+    switch (action?.toLowerCase()) {
         case ACTIONS.ADD:
             if (params.length === 2) {
                 albumCollection.addAlbum(params?.[0], params?.[1]);
@@ -56,9 +56,8 @@ function processInput(input = '', albumCollection = new Map()) {
             break;
 
         case ACTIONS.QUIT:
-            console.log('Bye!');
+            console.log(`Bye!\n`);
             process.exit(0);
-            break;
 
         default:
             console.log('Invalid command.')
