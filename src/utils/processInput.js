@@ -1,5 +1,7 @@
 import { ACTIONS } from '../constants.js';
 import tokenizeInput from './tokenizeInput.js';
+import wrappedInQuotes from './wrappedInQuotes.js';
+import stripQuotes from './stripQuotes.js';
 
 function processInput(input = '', albumCollection = new Map()) {
     const tokens = tokenizeInput(input.trim());
@@ -8,7 +10,12 @@ function processInput(input = '', albumCollection = new Map()) {
     switch (action?.toLowerCase()) {
         case ACTIONS.ADD:
             if (params.length === 2) {
-                albumCollection.addAlbum(params?.[0], params?.[1]);
+                if(!params.every(param => wrappedInQuotes(param))) {
+                    console.log('album title and artist must be wrapped in double quotes');
+                    break;
+                }
+
+                albumCollection.addAlbum(stripQuotes(params?.[0]), stripQuotes(params?.[1]));
             } else {
                 console.log('Please specify title and artist');
             }
@@ -34,7 +41,12 @@ function processInput(input = '', albumCollection = new Map()) {
                 const artistFilter = params?.[2];
 
                 if (artistFilter) {
-                    filters['artist'] = artistFilter;
+                    if(!wrappedInQuotes(artistFilter)) {
+                        console.log('album artist must be wrapped in double quotes');
+                        break;
+                    }
+
+                    filters['artist'] = stripQuotes(artistFilter);
                 } else {
                     console.log('Please specify the artist');
                     break;
@@ -52,7 +64,12 @@ function processInput(input = '', albumCollection = new Map()) {
 
         case ACTIONS.PLAY:
             if (params?.length === 1) {
-                albumCollection.playAlbum(params?.[0]);
+                if(!wrappedInQuotes(params?.[0])) {
+                    console.log('album title must be wrapped in double quotes');
+                    break;
+                }
+
+                albumCollection.playAlbum(stripQuotes(params?.[0]));
             } else {
                 console.log('Please specify the album name');
             }

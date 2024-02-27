@@ -8,11 +8,11 @@ function tokenizeInput(input) {
             tokenList.push(currentToken);
             currentToken = '';
         }
-        } else if (input[i] == '"' || input[i] === "'") {
+        } else if (input[i] === '"' || input[i] === "'") {
             const closingQuoteIndex = input.indexOf(input[i], i + 1);
         
             if (closingQuoteIndex !== -1) {
-                tokenList.push(input.substring(i + 1, closingQuoteIndex));
+                tokenList.push(input.substring(i, closingQuoteIndex + 1));
                 i = closingQuoteIndex;
             }
         } else {

@@ -18,6 +18,11 @@ describe('processInput function', () => {
   });
 
   describe('Adding an album', () => {
+      test('title and artist must be in double quotes', () => {
+        processInput(`add 'Ride the Lightning' "Metallica"`, albumCollection);
+        expect(mockConsoleLog).toHaveBeenCalledWith('album title and artist must be wrapped in double quotes');
+      });
+
       test('should add an album', () => {
         processInput('add "Ride the Lightning" "Metallica"', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Added "Ride the Lightning" by "Metallica"');
@@ -79,6 +84,12 @@ describe('processInput function', () => {
         expect(mockConsoleLog).toHaveBeenCalledWith('Please specify the artist');
     });
 
+
+    test('artist should be wrapped in double quotes', () => {
+        processInput("show all by 'test'", albumCollection);
+        expect(mockConsoleLog).toHaveBeenCalledWith('album artist must be wrapped in double quotes');
+    });
+
     test('should return invalid input', () => {
         processInput('show all test', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Invalid command.');
@@ -93,13 +104,18 @@ describe('processInput function', () => {
       });
     
       test('should prompt to specify album name when playing without it', () => {
-        processInput('Play', albumCollection);
+        processInput('play', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Please specify the album name');
       });
 
       test('should not play an unknown album', () => {
         processInput('play "unknown"', albumCollection);
         expect(mockConsoleLog).toHaveBeenCalledWith('Album "unknown" not found.');
-      })
+      });
+
+      test('title should be wrapped in double quotes', () => {
+        processInput("play 'test'", albumCollection);
+        expect(mockConsoleLog).toHaveBeenCalledWith('album title must be wrapped in double quotes');
+    });
   })
 });
