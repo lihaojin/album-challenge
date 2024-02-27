@@ -4,6 +4,7 @@
     "main": "music.js",
     "type": "module",
     "scripts": {
+        "start": "./music.js",
         "test": "NODE_OPTIONS=--experimental-vm-modules npx jest"
     },
     "keywords": [],

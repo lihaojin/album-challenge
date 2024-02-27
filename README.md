@@ -9,7 +9,7 @@ npm install
 To start the music app:
 
 ```
-./music.js
+npm run start
 ```
 
 To run unit tests
