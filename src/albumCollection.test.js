@@ -1,11 +1,14 @@
 import { jest } from '@jest/globals'
 import AlbumCollection from './albumCollection.js';
 
+const mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+
 describe('AlbumCollection', () => {
   let albumCollection;
 
   beforeEach(() => {
     albumCollection = new AlbumCollection();
+    mockConsoleLog.mockClear();
   });
 
   describe('Adding an album', () => {
@@ -38,42 +41,44 @@ describe('AlbumCollection', () => {
       });
     
       test('should not play unknown album', () => {
-        const mockLog = jest.spyOn(console, 'log');
         albumCollection.playAlbum('unknown');
-        expect(mockLog).toHaveBeenCalledWith("Album \"unknown\" not found.");
-        mockLog.mockRestore();
+        expect(mockConsoleLog).toHaveBeenCalledWith("Album \"unknown\" not found.");
       });
   });
 
   describe('Showing albums', () => {
       test('should show all albums', () => {
-        const mockLog = jest.spyOn(console, 'log');
         albumCollection.addAlbum('Title1', 'Artist1');
         albumCollection.addAlbum('Title2', 'Artist2');
         albumCollection.show();
-        expect(mockLog).toHaveBeenNthCalledWith(1, "Added \"Title1\" by \"Artist1\"");
-        expect(mockLog).toHaveBeenNthCalledWith(2, "Added \"Title2\" by \"Artist2\"");
-        expect(mockLog).toHaveBeenNthCalledWith(3, '"Title1" by Artist1 (unplayed)');
-        expect(mockLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
-        mockLog.mockRestore();
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(1, "Added \"Title1\" by \"Artist1\"");
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(2, "Added \"Title2\" by \"Artist2\"");
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(3, '"Title1" by Artist1 (unplayed)');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
       });
+
+      test('should show all albums', () => {
+        albumCollection.addAlbum('Title1', 'Artist1');
+        albumCollection.addAlbum('Title2', 'Artist2');
+        albumCollection.show({ test: 'test' });
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(1, "Added \"Title1\" by \"Artist1\"");
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(2, "Added \"Title2\" by \"Artist2\"");
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(3, '"Title1" by Artist1 (unplayed)');
+        expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
+      })
     
       test('should show filtered albums', () => {
-        const mockLog = jest.spyOn(console, 'log');
         albumCollection.addAlbum('Title1', 'Artist1');
         albumCollection.addAlbum('Title2', 'Artist2');
         albumCollection.addAlbum('Title3', 'Artist3');
         albumCollection.playAlbum('Title2'); 
         albumCollection.show({ played: false, artist: 'Artist1' });
-        expect(mockLog).toHaveBeenCalledWith('"Title1" by Artist1');
-        mockLog.mockRestore();
+        expect(mockConsoleLog).toHaveBeenCalledWith('"Title1" by Artist1');
       });
     
       test('should show no albums', () => {
-        const mockLog = jest.spyOn(console, 'log');
         albumCollection.show();
-        expect(mockLog).toHaveBeenCalledWith('No albums found');
-        mockLog.mockRestore();
+        expect(mockConsoleLog).toHaveBeenCalledWith('No albums found');
       });
   });
 });
