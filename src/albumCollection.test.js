@@ -57,7 +57,7 @@ describe('AlbumCollection', () => {
         expect(mockConsoleLog).toHaveBeenNthCalledWith(4, '"Title2" by Artist2 (unplayed)');
       });
 
-      test('should show all albums', () => {
+      test('should show all albums given an invalid filter', () => {
         albumCollection.addAlbum('Title1', 'Artist1');
         albumCollection.addAlbum('Title2', 'Artist2');
         albumCollection.show({ test: 'test' });
