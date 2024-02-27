@@ -1,5 +1,11 @@
 # album-challenge
 
+Install Dependencies (ensure node.js is installed on your machine)
+
+```
+npm install
+```
+
 To start the music app:
 
 ```
