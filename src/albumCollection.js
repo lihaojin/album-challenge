@@ -41,8 +41,6 @@ export default class AlbumCollection {
         let filteredAlbums = [...this.albums.values()];
         const validFilterKeys = Object.keys(filters).filter(key => !!ALBUM_ATTRIBUTES[key]);
 
-        // filters { artist: 'phil li', played: false }
-        // { artist: 'test', title: 'test', played: false }
         if (validFilterKeys.length > 0) {
             filteredAlbums = filteredAlbums.filter(album => {
                 return validFilterKeys.every(key => album[key] === filters[key]);
