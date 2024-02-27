@@ -9,7 +9,7 @@ function processInput(input = '', albumCollection = new Map()) {
     const tokens = tokenizeInput(input.trim());
     const [action, ...params] = tokens;
 
-    switch (action) {
+    switch (action.toLowerCase()) {
         case ACTIONS.ADD:
             if (params.length === 2) {
                 albumCollection.addAlbum(params?.[0], params?.[1]);
