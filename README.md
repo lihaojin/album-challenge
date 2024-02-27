@@ -12,6 +12,11 @@ To start the music app:
 ./music.js
 ```
 
+To run unit tests
+```
+npm run test
+```
+
 Sample input/output
 ```
     Welcome to your music collection!
